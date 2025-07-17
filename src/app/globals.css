@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 min-h-screen;
+}
+
+.card-shadow {
+  @apply shadow-lg hover:shadow-xl transition-shadow duration-300;
+}
+
+.weather-card {
+  @apply bg-white rounded-2xl p-6 card-shadow;
+}
+
+.forecast-card {
+  @apply bg-white rounded-xl p-4 card-shadow hover:scale-105 transition-transform duration-200;
+}
