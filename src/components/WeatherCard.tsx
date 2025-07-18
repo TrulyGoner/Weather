@@ -8,13 +8,13 @@ interface WeatherCardProps {
 
 export default function WeatherCard({ temperature, weatherCode, time }: WeatherCardProps) {
   const getWeatherStyles = (code: number) => {
-    if ([0, 1].includes(code)) return { bg: 'bg-yellow-100', icon: '☀️' }; 
-    if ([2, 3].includes(code)) return { bg: 'bg-gray-200', icon: '☁️' }; 
+    if ([0, 1].includes(code)) return { bg: 'bg-yellow-100', icon: '☀️' };
+    if ([2, 3].includes(code)) return { bg: 'bg-gray-200', icon: '☁️' };
     if ([45, 48].includes(code)) return { bg: 'bg-gray-300', icon: '🌫️' };
-    if ([51, 53, 55, 61, 63, 65].includes(code)) return { bg: 'bg-blue-200', icon: '🌧️' }; 
-    if ([71, 73, 75].includes(code)) return { bg: 'bg-blue-300', icon: '❄️' }; 
-    if ([95, 96, 99].includes(code)) return { bg: 'bg-purple-200', icon: '⛈️' }; 
-    return { bg: 'bg-gray-100', icon: '🌥️' }; 
+    if ([51, 53, 55, 61, 63, 65].includes(code)) return { bg: 'bg-blue-200', icon: '🌧️' };
+    if ([71, 73, 75].includes(code)) return { bg: 'bg-blue-300', icon: '❄️' };
+    if ([95, 96, 99].includes(code)) return { bg: 'bg-purple-200', icon: '⛈️' };
+    return { bg: 'bg-gray-100', icon: '🌥️' };
   };
 
   const { bg, icon } = getWeatherStyles(weatherCode);
