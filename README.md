@@ -1,44 +1,50 @@
-<<<<<<< HEAD
-# Weather
-=======
-<<<<<<< HEAD
-# Weather
-=======
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Прогноз погоды
+Простое веб-приложение на Next.js для отображения текущей погоды и прогноза на 5 дней для выбранного города. Приложение использует API Open-Meteo для получения погодных данных. 
+Особенности
 
-## Getting Started
+Динамический выбор города: Ввод названия города с автодополнением и разрешением дублирующихся названий (показ страны и региона).
+Текущая погода: Отображение температуры, погодных условий и времени в выбранном городе.
+Прогноз на 5 дней: Показ максимальной и минимальной температуры, а также погодных условий для каждого дня.
+Русский интерфейс: Полностью переведенный интерфейс, включая названия, сообщения об ошибках и формат дат (date-fns с локализацией ru).
+Использование эмодзи: Иконки погоды реализованы через эмодзи для простоты и избежания сторонних библиотек.
+Redux для управления состоянием: Эффективное управление данными о погоде.
+Адаптивный дизайн: Поддержка различных устройств с использованием Tailwind CSS.
 
-First, run the development server:
+Технологии
 
-```bash
+Next.js (14.2.15): Фреймворк для серверного рендеринга и статической генерации.
+React (18.3.1): Для построения пользовательского интерфейса.
+Redux Toolkit (2.2.7): Управление состоянием приложения.
+date-fns (4.1.0): Форматирование дат на русском языке.
+Tailwind CSS (3.4.10): Стилизация интерфейса.
+Open-Meteo API: Бесплатный API для получения погодных данных и геокодирования.
+TypeScript: Для типизации кода.
+Node.js (рекомендуется 20.x LTS, тестировалось с 24.4.1).
+
+Установка и запуск
+
+```
+git clone https://github.com/TrulyGoner/Weather.git
+cd Weather
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
+npm run build
+npm start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+Использование
 
-To learn more about Next.js, take a look at the following resources:
+Введите название города (например, "Москва") в поле ввода.
+Появится список предложений с указанием страны и региона (например, "Москва, Россия", "Moscow, Соединенные Штаты (Idaho)").
+Выберите нужный город или нажмите "Поиск" для выбора первого результата.
+Текущая погода: Температура, погодные условия (например, "Ясное небо") и время в русском формате (например, "18 июля 2025 г., 14:58").
+Прогноз на 5 дней: Даты в формате "Пт, 18 июл", максимальная и минимальная температура, погодные условия.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+При некорректном вводе города отображается сообщение "Город не найден".
+При проблемах с API — "Не удалось получить данные о погоде".
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> f7a4ff8 (ver 0.1)
->>>>>>> c355564 (ver 0.5)
