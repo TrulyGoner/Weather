@@ -9,7 +9,7 @@
 Next.js (14.2.15)
 React (18.3.1)
 Redux Toolkit (2.2.7)
-date-fns (4.1.0
+date-fns (4.1.0)
 Tailwind CSS (3.4.10):
 Open-Meteo API
 TypeScript
