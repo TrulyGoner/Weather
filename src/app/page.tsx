@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../store/store';
-import { fetchWeather } from '../store/weatherSlice';
+import { fetchWeather } from '../store/WeatherSlice';
 import { RootState } from '../store/store';
 import WeatherCard from '../components/WeatherCard';
 import ForecastCard from '../components/ForecastCard';
