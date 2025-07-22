@@ -1,5 +1,3 @@
-import { Skeleton } from '@skeletonlabs/skeleton';
-
 export default function ForecastCardSkeleton() {
     return (
       <div className="forecast-card bg-white rounded-xl p-4 card-shadow animate-pulse">
