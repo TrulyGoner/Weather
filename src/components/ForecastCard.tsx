@@ -9,13 +9,13 @@ interface ForecastCardProps {
 
 export default function ForecastCard({ date, maxTemp, minTemp, weatherCode }: ForecastCardProps) {
   const getWeatherStyles = (code: number) => {
-    if ([0, 1].includes(code)) return { color: 'text-yellow-600', icon: '☀️' }; // Clear, Mainly clear
-    if ([2, 3].includes(code)) return { color: 'text-gray-600', icon: '☁️' }; // Cloudy
-    if ([45, 48].includes(code)) return { color: 'text-gray-500', icon: '🌫️' }; // Fog
-    if ([51, 53, 55, 61, 63, 65].includes(code)) return { color: 'text-blue-600', icon: '🌧️' }; // Rain, Drizzle
-    if ([71, 73, 75].includes(code)) return { color: 'text-blue-700', icon: '❄️' }; // Snow
-    if ([95, 96, 99].includes(code)) return { color: 'text-purple-600', icon: '⛈️' }; // Thunderstorm
-    return { color: 'text-gray-600', icon: '🌥️' }; // Default
+    if ([0, 1].includes(code)) return { color: 'text-yellow-600', icon: '☀️' }; 
+    if ([2, 3].includes(code)) return { color: 'text-gray-600', icon: '☁️' }; 
+    if ([45, 48].includes(code)) return { color: 'text-gray-500', icon: '🌫️' }; 
+    if ([51, 53, 55, 61, 63, 65].includes(code)) return { color: 'text-blue-600', icon: '🌧️' }; 
+    if ([71, 73, 75].includes(code)) return { color: 'text-blue-700', icon: '❄️' }; 
+    if ([95, 96, 99].includes(code)) return { color: 'text-purple-600', icon: '⛈️' }; 
+    return { color: 'text-gray-600', icon: '🌥️' }; 
   };
 
   const { color, icon } = getWeatherStyles(weatherCode);

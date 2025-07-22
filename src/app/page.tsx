@@ -7,6 +7,8 @@ import { fetchWeather } from '../store/WeatherSlice';
 import { RootState } from '../store/store';
 import WeatherCard from '../components/WeatherCard';
 import ForecastCard from '../components/ForecastCard';
+import WeatherCardSkeleton from '../components/WeatherCardSkeleton';
+import ForecastCardSkeleton from '../components/ForecastCardSkeleton';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
@@ -24,22 +26,22 @@ export default function Home() {
   const { currentWeather, forecast, status, error } = useSelector(
     (state: RootState) => state.weather
   );
-  const [city, setCity] = useState('Воронеж'); // Default to Voronezh
-  const [latitude, setLatitude] = useState(51.67); // Voronezh latitude
-  const [longitude, setLongitude] = useState(39.22); // Voronezh longitude
+  const [city, setCity] = useState('Воронеж');
+  const [latitude, setLatitude] = useState(51.67);
+  const [longitude, setLongitude] = useState(39.22);
   const [suggestions, setSuggestions] = useState<CityResult[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isCityLoading, setIsCityLoading] = useState(false);
 
-  // Fetch weather when coordinates change
   useEffect(() => {
     dispatch(fetchWeather({ latitude, longitude }));
   }, [dispatch, latitude, longitude]);
 
-  // Handle city input and fetch suggestions
   const handleCityInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     setCity(input);
     if (input.length > 2) {
+      setIsCityLoading(true);
       try {
         const response = await fetch(
           `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(input)}&count=10&language=ru`
@@ -53,6 +55,8 @@ export default function Home() {
       } catch (err) {
         setSuggestions([]);
         setShowSuggestions(false);
+      } finally {
+        setIsCityLoading(false);
       }
     } else {
       setSuggestions([]);
@@ -60,7 +64,6 @@ export default function Home() {
     }
   };
 
-  // Handle city selection from suggestions
   const handleCitySelect = (cityResult: CityResult) => {
     setCity(cityResult.name);
     setLatitude(cityResult.latitude);
@@ -69,11 +72,9 @@ export default function Home() {
     setShowSuggestions(false);
   };
 
-  // Handle form submission
   const handleCitySearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (suggestions.length > 0) {
-      // Select the first suggestion if the user submits without clicking
       handleCitySelect(suggestions[0]);
     }
   };
@@ -85,13 +86,17 @@ export default function Home() {
       </h1>
       <form onSubmit={handleCitySearch} className="mb-6 w-full max-w-md">
         <div className="relative flex items-center space-x-2">
-          <input
-            type="text"
-            value={city}
-            onChange={handleCityInput}
-            placeholder="Введите город (например, Воронеж)"
-            className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          {isCityLoading ? (
+            <div className="flex-1 h-10 bg-gray-200 rounded-lg animate-pulse"></div>
+          ) : (
+            <input
+              type="text"
+              value={city}
+              onChange={handleCityInput}
+              placeholder="Введите город (например, Воронеж)"
+              className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          )}
           <button
             type="submit"
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
@@ -113,13 +118,18 @@ export default function Home() {
           )}
         </div>
       </form>
-      {status === 'loading' && (
-        <p className="text-lg text-gray-600 animate-pulse">Загрузка...</p>
-      )}
-      {status === 'failed' && (
+      {status === 'loading' ? (
+        <div className="w-full max-w-5xl space-y-6">
+          <WeatherCardSkeleton />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {Array(5).fill(0).map((_, index) => (
+              <ForecastCardSkeleton key={index} />
+            ))}
+          </div>
+        </div>
+      ) : status === 'failed' ? (
         <p className="text-lg text-red-500">Ошибка: {error}</p>
-      )}
-      {status === 'succeeded' && currentWeather && (
+      ) : status === 'succeeded' && currentWeather ? (
         <div className="w-full max-w-5xl space-y-6">
           <WeatherCard
             temperature={currentWeather.temperature}
@@ -138,7 +148,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      )}
+      ) : null}
     </main>
   );
 }
